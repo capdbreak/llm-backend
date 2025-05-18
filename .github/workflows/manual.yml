@@ -20,18 +20,12 @@ jobs:
           ssh-keyscan -H ${{ secrets.GCP_VM_IP }} >> ~/.ssh/known_hosts
       - name: SSH into GCP VM and run commands
         run: |
-          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519
-          cd /home/${{ secrets.GCP_VM_USER }}
-          ls
-          cd llm-backend
-      - name: git
-        run: |
-          git pull
-          cd ..
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 \
+          cd ~/llm-backend && \
       - name: docker build
         run: |
-          docker-compose build llm
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 docker-compose build llm
       - name: docker up
         run: |
-          docker-compose down llm
-          docker-compose up llm -d
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 docker-compose down llm
+          ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 docker-compose up llm -d
