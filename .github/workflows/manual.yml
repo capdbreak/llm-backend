@@ -25,6 +25,7 @@ jobs:
             set -e
             cd ~/llm-backend
             git pull
+            cd ..
             docker-compose build llm
             docker-compose down
             docker-compose up -d llm
