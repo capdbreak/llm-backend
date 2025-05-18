@@ -6,7 +6,7 @@ from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from financeflow_llm_backend.core import load_chain, AnalysisResult, Article
 
-app = FastAPI()
+app = FastAPI(root_path="/llm")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
