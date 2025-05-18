@@ -30,5 +30,5 @@ RUN poetry install --no-root --only main
 # ---- Expose port and run ----
 EXPOSE 8000
 
-CMD ["poetry", "run", "uvicorn", "financeflow_llm_backend.server:app", "--host", "0.0.0.0", "--port", "8000", "--root-path", "/llm"]
+CMD ["poetry", "run", "uvicorn", "financeflow_llm_backend.server:app", "--host", "0.0.0.0", "--port", "8000"]
 
