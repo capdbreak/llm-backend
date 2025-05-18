@@ -21,7 +21,7 @@ jobs:
       - name: SSH into GCP VM and run commands
         run: |
           ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519
-          cd ~/llm-backend
+          cd /home/${{ secrets.GCP_VM_USER }}/llm-backend
       - name: git
         run: |
           git pull
