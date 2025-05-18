@@ -22,6 +22,7 @@ jobs:
         run: |
           ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 \
           cd ~/llm-backend && \
+          git pull
       - name: docker build
         run: |
           ssh ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_IP }} -i ~/.ssh/id_ed25519 docker-compose build llm
