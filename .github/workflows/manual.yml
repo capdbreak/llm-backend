@@ -28,5 +28,5 @@ jobs:
             cd ..
             docker-compose build llm
             docker-compose down
-            docker-compose up -d llm
+            docker-compose up -d
           EOF
