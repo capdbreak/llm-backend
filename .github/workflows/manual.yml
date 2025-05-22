@@ -35,7 +35,7 @@ jobs:
             docker compose build llm
             
             echo "Restarting only llm service..."
-            docker compose up -d --no-recreate llm
+            docker compose up -d --build llm
             
             echo "Deployment completed successfully."
             echo "Current status of containers:"
