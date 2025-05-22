@@ -6,7 +6,7 @@ from langchain.chat_models import init_chat_model
 
 # Load the environment variables from .env
 base_url = getenv("OPENAI_BASE_URL")
-model = init_chat_model("google/gemini-2.5-pro-preview-03-25", model_provider="openai", base_url=base_url, api_key=api_key)
+model = init_chat_model("gpt-4o", model_provider="openai", base_url=base_url, api_key=api_key)
 from typing import List
 
 from langchain_core.output_parsers import PydanticOutputParser
