@@ -4,7 +4,7 @@ from typing import Annotated, List
 from pydantic import BaseModel, Field
 from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from financeflow_llm_backend.core import load_chain, AnalysisResult, Article
+from financeflow_llm_backend.core import load_chain, AnalysisResult, Article, NewsArticles, news_chain
 
 app = FastAPI()
 app.add_middleware(
@@ -35,3 +35,10 @@ async def run_query(
         "results": results
     }
 
+@app.post("/news")
+async def get_news(
+    date: Annotated[str, Body(...)],
+    num_of_news: Annotated[str, Body(...)],
+    subject: Annotated[str, Body(...)]
+) -> NewsArticles:
+    return news_chain.invoke({"date": date, "numbers": num_of_news, "topic": subject})
