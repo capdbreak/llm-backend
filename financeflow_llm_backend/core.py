@@ -61,5 +61,28 @@ prompt = ChatPromptTemplate.from_messages(
 ).partial(format_instructions=parser.get_format_instructions())
 chain = prompt | model | parser
 
+class NewsArticle(BaseModel):
+    title: str
+    link: str
+    publisher: str
+
+class NewsArticles(BaseModel):
+    articles: List[NewsArticle]
+
 def load_chain():
     return chain
+
+news_parser = PydanticOutputParser(pydantic_object=NewsArticles)
+news_prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are an expert in news extraction.\n{format_instructions}",
+        ),
+        ("human", "What's the top {numbers} important news related to {topic} at {date}?")
+    ]
+).partial(format_instructions=news_parser.get_format_instructions())
+
+news_llm = model.bind_tools([{"type": "web_search_preview"}])
+
+news_chain = news_prompt | news_llm | news_parser
